@@ -16,14 +16,17 @@ export class HouseService {
         return houseAdded;
     }
 
-    async list() {
+    async list(): Promise<Array<House> | null> {
         const houses = await this.houseRepository.list()
 
-        return {
-            houses
-        }
+        return houses
     }
-    async findByName() {}
+    
+    async findByName(name: string): Promise<Array<House> | null> {
+        const houses = await this.houseRepository.findByName(name)
+
+        return houses
+    }
     async findByID() {}
     async deleteId() {}
 }
