@@ -7,14 +7,23 @@ export class HouseService {
         private readonly houseRepository: IHouseRepository
     ) {}
 
-    async execute(props: IHouseProps)
+    async create(props: IHouseProps): Promise<House | null>
     {        
         const house = House.create(props)
         
-        try {
-            const houseAdded = this.houseRepository.create(house);
-        } catch(err) {
-            //
+        const houseAdded = await this.houseRepository.create(house);
+
+        return houseAdded;
+    }
+
+    async list() {
+        const houses = await this.houseRepository.list()
+
+        return {
+            houses
         }
     }
+    async findByName() {}
+    async findByID() {}
+    async deleteId() {}
 }
