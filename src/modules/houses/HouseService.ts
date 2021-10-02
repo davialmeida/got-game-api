@@ -1,17 +1,26 @@
+import { ILordRepository } from "../lords/interfaces/ILordRepository"
+import { Lord } from "../lords/Lord"
 import { House } from "./House"
+import { DeletedItem } from "./interfaces/DeletedItem"
+import { IHouseDTO } from "./interfaces/IHouseDTO"
 import { IHouseProps } from "./interfaces/IHouseProps"
-import { DeletedItem, IHouseRepository } from "./interfaces/IHouseRepository"
+import { IHouseRepository } from "./interfaces/IHouseRepository"
 
 export class HouseService {
     constructor(
-        private readonly houseRepository: IHouseRepository
+        private readonly houseRepository: IHouseRepository,
+        private readonly lordRepository: ILordRepository
     ) {}
 
-    async create(props: IHouseProps): Promise<House | null>
+    async create(props: IHouseDTO): Promise<House | null>
     {        
-        const house = House.create(props)
+        const {current_lord_id: lordId, ...houseProps} = props        
+        let lord = null
+        if (lordId) lord = await this.lordRepository.findByID(lordId);
+
+        const house = House.create(houseProps)
         
-        const houseAdded = await this.houseRepository.create(house)
+        const houseAdded = await this.houseRepository.create(house, lord)
 
         return houseAdded
     }
@@ -35,10 +44,10 @@ export class HouseService {
     }
     
     async deleteById(id: string): Promise<DeletedItem> {
-            await this.houseRepository.deleteById(id)
-    
-            return {
-                message: 'Item deleted'
-            }
+        await this.houseRepository.deleteById(id)
+
+        return {
+            message: 'Item deleted'
+        }
     }
 }
