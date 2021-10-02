@@ -1,6 +1,6 @@
-import { House } from "./House";
-import { IHouseProps } from "./interfaces/IHouseProps";
-import { DeletedItem, IHouseRepository } from "./interfaces/IHouseRepository";
+import { House } from "./House"
+import { IHouseProps } from "./interfaces/IHouseProps"
+import { DeletedItem, IHouseRepository } from "./interfaces/IHouseRepository"
 
 export class HouseService {
     constructor(
@@ -11,9 +11,9 @@ export class HouseService {
     {        
         const house = House.create(props)
         
-        const houseAdded = await this.houseRepository.create(house);
+        const houseAdded = await this.houseRepository.create(house)
 
-        return houseAdded;
+        return houseAdded
     }
 
     async list(): Promise<Array<House> | null> {
@@ -27,6 +27,7 @@ export class HouseService {
 
         return houses
     }
+    
     async findByID(id: string): Promise<House | null> {
         const house = await this.houseRepository.findByID(id)
 

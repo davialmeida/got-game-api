@@ -1,4 +1,4 @@
-import { House } from "../House";
+import { House } from "../House"
 
 export interface DeletedItem {
     message: string
