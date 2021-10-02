@@ -27,7 +27,7 @@ export class HouseService {
 
         return houses
     }
-    async findByID(id: string) {
+    async findByID(id: string): Promise<House | null> {
         const house = await this.houseRepository.findByID(id)
 
         return house
