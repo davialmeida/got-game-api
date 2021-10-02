@@ -1,6 +1,6 @@
 import { House } from "./House";
 import { IHouseProps } from "./interfaces/IHouseProps";
-import { IHouseRepository } from "./interfaces/IHouseRepository";
+import { DeletedItem, IHouseRepository } from "./interfaces/IHouseRepository";
 
 export class HouseService {
     constructor(
@@ -32,5 +32,12 @@ export class HouseService {
 
         return house
     }
-    async deleteId() {}
+    
+    async deleteById(id: string): Promise<DeletedItem> {
+            await this.houseRepository.deleteById(id)
+    
+            return {
+                message: 'Item deleted'
+            }
+    }
 }
