@@ -27,6 +27,10 @@ export class HouseService {
 
         return houses
     }
-    async findByID() {}
+    async findByID(id: string) {
+        const house = await this.houseRepository.findByID(id)
+
+        return house
+    }
     async deleteId() {}
 }
