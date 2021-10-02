@@ -1,5 +1,5 @@
 import { Entity } from "src/shared/domain/Entity"
-import { ILordProps } from "./ILordProps"
+import { ILordProps } from "./interfaces/ILordProps"
 
 export class Lord extends Entity<ILordProps> {
     private constructor({ uuid, ...data }: ILordProps) {
