@@ -1,19 +1,28 @@
+import { ILordRepository } from "../lords/interfaces/ILordRepository"
+import { Lord } from "../lords/Lord"
 import { House } from "./House"
+import { HouseMap } from "./infra/mappers/HouseMapper"
+import { DeletedItem } from "./interfaces/DeletedItem"
+import { IHouseDTO } from "./interfaces/IHouseDTO"
 import { IHouseProps } from "./interfaces/IHouseProps"
-import { DeletedItem, IHouseRepository } from "./interfaces/IHouseRepository"
+import { IHouseRepository } from "./interfaces/IHouseRepository"
 
 export class HouseService {
     constructor(
-        private readonly houseRepository: IHouseRepository
+        private readonly houseRepository: IHouseRepository,
+        private readonly lordRepository: ILordRepository
     ) {}
 
-    async create(props: IHouseProps): Promise<House | null>
+    async insert(props: IHouseDTO): Promise<House | null>
     {        
-        const house = House.create(props)
-        
-        const houseAdded = await this.houseRepository.create(house)
+        let {current_lord_id: lordId, ...houseProps} = props        
+        let lord = null
+        if (lordId) lord = await this.lordRepository.findByID(lordId);
+        const house = House.create({current_lord: lord, ...houseProps})
 
-        return houseAdded
+        const houseAdded = await this.houseRepository.insert(house)
+
+        return houseAdded ? HouseMap.toDomain(houseAdded) : null
     }
 
     async list(): Promise<Array<House> | null> {
@@ -34,11 +43,7 @@ export class HouseService {
         return house
     }
     
-    async deleteById(id: string): Promise<DeletedItem> {
-            await this.houseRepository.deleteById(id)
-    
-            return {
-                message: 'Item deleted'
-            }
+    async deleteById(id: string): Promise<Boolean> {
+        return await this.houseRepository.deleteById(id)
     }
 }

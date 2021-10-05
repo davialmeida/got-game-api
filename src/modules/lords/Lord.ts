@@ -1,5 +1,6 @@
-import { Entity } from "src/shared/domain/Entity"
-import { ILordProps } from "./ILordProps"
+
+import { Entity } from "@shared/domain/Entity"
+import { ILordProps } from "./interfaces/ILordProps"
 
 export class Lord extends Entity<ILordProps> {
     private constructor({ uuid, ...data }: ILordProps) {
@@ -10,5 +11,9 @@ export class Lord extends Entity<ILordProps> {
         const instance = new Lord(props)
 
         return instance
+    }
+
+    public toObject(): ILordProps {
+        return this.props
     }
 }
