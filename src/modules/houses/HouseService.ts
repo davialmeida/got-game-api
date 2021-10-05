@@ -1,10 +1,7 @@
 import { ILordRepository } from "../lords/interfaces/ILordRepository"
-import { Lord } from "../lords/Lord"
 import { House } from "./House"
 import { HouseMap } from "./infra/mappers/HouseMapper"
-import { DeletedItem } from "./interfaces/DeletedItem"
 import { IHouseDTO } from "./interfaces/IHouseDTO"
-import { IHouseProps } from "./interfaces/IHouseProps"
 import { IHouseRepository } from "./interfaces/IHouseRepository"
 
 export class HouseService {
