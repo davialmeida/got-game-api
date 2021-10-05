@@ -1,4 +1,4 @@
-import { LordMongoSchema } from '@modules/lords/infra/LordMongoModel';
+import { LordMongoSchema } from '@modules/lords/infra/mongodb/LordMongoModel';
 import mongoose from 'mongoose'
 
 export const HouseMongoSchema = new mongoose.Schema({

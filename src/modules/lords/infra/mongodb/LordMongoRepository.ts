@@ -1,7 +1,9 @@
-import { ILordRepository } from '../interfaces/ILordRepository';
-import { Lord } from '../Lord';
-import { LordMapper } from '../mappers/LordMapper';
-import { LordMongoModel } from './mongodb/LordMongoModel';
+import { ILordRepository } from '@modules/lords/interfaces/ILordRepository';
+import { Lord } from '@modules/lords/Lord';
+import { LordMapper } from '@modules/lords/mappers/LordMapper';
+import { LordMongoModel } from './LordMongoModel';
+
+
 
 export class LordMongoRepository implements ILordRepository {
     static create() {

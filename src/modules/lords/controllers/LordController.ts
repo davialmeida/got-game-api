@@ -1,5 +1,5 @@
 
-import { LordMongoRepository } from '@modules/lords/infra/LordMongoRepository'
+import { LordMongoRepository } from '@modules/lords/infra/mongodb/LordMongoRepository'
 import { NextFunction, Request, Response } from 'express'
 import { MakeResponse } from '@shared/http/express/MakeResponse'
 import { LordService } from '../LordService'

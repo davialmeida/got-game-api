@@ -1,7 +1,7 @@
 
 import {HouseMongoRepository} from '@modules/houses/infra/mongoose/HouseMongoRepository'
 import { HouseService } from '@modules/houses/HouseService'
-import { LordMongoRepository } from '@modules/lords/infra/LordMongoRepository'
+import { LordMongoRepository } from '@modules/lords/infra/mongodb/LordMongoRepository'
 import { HouseMap } from '@modules/houses/infra/mappers/HouseMapper'
 import { House } from '@modules/houses/House'
 import { NextFunction, Request, Response } from 'express'
@@ -18,11 +18,7 @@ const houseService = new HouseService(
 export class HouseController {
     static async insert(req: Request, res: Response, next: NextFunction) {
         try {
-            let house = await houseService.insert({
-                name: 'House Stark',
-                region: 'North',
-                foundation_year: 'Era do Gelo'
-            })
+            let house = await houseService.insert(req.body)
     
             if (house instanceof House) house = HouseMap.toDTO(house)
         

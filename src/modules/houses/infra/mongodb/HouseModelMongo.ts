@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { LordMongoSchema } from "@modules/lords/infra/LordMongoModel";
+import { LordMongoSchema } from "@modules/lords/infra/mongodb/LordMongoModel";
 
 const Schema = mongoose.Schema;
 
