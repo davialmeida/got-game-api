@@ -1,15 +1,23 @@
 import { HouseController } from '@modules/houses/controllers/HouseController'
 import express from 'express'
-import { MakeResponse } from './MakeResponse'
 
 const routes = express.Router()
 
 /**
  * Houses
  */
-routes.put('/house', HouseController.insert)
+routes.post('/house', HouseController.insert)
 routes.get('/houses', HouseController.list)
 routes.get('/houses/search/:name', HouseController.findByName)
-routes.delete('/houses/:id', HouseController.findById)
+routes.get('/houses/:id', HouseController.findById)
+routes.delete('/houses/:id', HouseController.deleteById)
+
+/**
+ * Lords
+ */
+ routes.post('/lord', HouseController.insert)
+ routes.get('/lords', HouseController.list)
+ routes.get('/lords/:id', HouseController.findById)
+ routes.delete('/lords/:id', HouseController.deleteById)
   
 export { routes }
