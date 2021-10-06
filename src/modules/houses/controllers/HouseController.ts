@@ -24,7 +24,7 @@ export class HouseController {
         
             const response = (new MakeResponse(res))
     
-            return house ? response.ok(house) : response.error('An error occurred while trying to insert a house')
+            return response.ok(house)
         } catch(err) {
             next(err)
         }

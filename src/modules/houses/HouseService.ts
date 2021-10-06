@@ -10,7 +10,7 @@ export class HouseService {
         private readonly lordRepository: ILordRepository
     ) {}
 
-    async insert(props: IHouseDTO): Promise<House | null>
+    async insert(props: IHouseDTO): Promise<House>
     {        
         let {current_lord_id: lordId, ...houseProps} = props        
         let lord = null
@@ -19,7 +19,7 @@ export class HouseService {
 
         const houseAdded = await this.houseRepository.insert(house)
 
-        return houseAdded ? HouseMap.toDomain(houseAdded) : null
+        return HouseMap.toDomain(houseAdded)
     }
 
     async list(): Promise<Array<House> | null> {

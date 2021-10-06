@@ -8,4 +8,8 @@ export abstract class Entity<T> {
       this.uuid = uuid ? uuid : v4()
       this.props = props
     }
+
+    public getUUID(): string {
+      return this.uuid
+  }
   }
